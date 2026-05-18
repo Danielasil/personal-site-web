@@ -4,6 +4,9 @@ import ProfileImg from "../assets/ProfileImg.png"
 import HeroBackground from "../assets/HeroImg.png"
 import HireButton from "./HireButton"
 import { mailTo, navItems } from "../data/site"
+import MenuMovileClose from "../assets/MenuMovileClose.svg"
+import MenuMovileOpen from "../assets/MenuMovileOpen.svg"
+
 
 function Hero() {
   const [heroImageReady, setHeroImageReady] = useState(false)
@@ -13,6 +16,7 @@ function Hero() {
   const centralTextRef = useRef(null)
   const locationTagRef = useRef(null)
   const hireButtonRef = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -93,7 +97,7 @@ function Hero() {
 
 
 {/* Navbar*/}
-  <div ref={navbarRef} className="opacity-0 fixed top-12 left-5 right-5 z-50 h-12 flex flex-row items-center justify-between overflow-hidden text-white">
+  <div ref={navbarRef} className="opacity-0 fixed top-12 left-5 right-5 z-50 h-12 flex flex-row items-center justify-between text-white">
 
     <a 
     href="#home"
@@ -108,8 +112,47 @@ function Hero() {
       <h1 className="w-37.35 mr-4 hidden md:block">Daniela Silva</h1>
     </a>
 
+   <div 
+    
+    className="flex md:hidden h-full shrink-0 items-center justify-center text-center rounded-[100px] px-1 gap-2 bg-[#D9D9D9]/8 backdrop-blur-[100px] hover:bg-white/20 transition-all duration-200">
+     
+    <button
+    type="button"
+    onClick={() => setMenuOpen((open) => !open)}
+    aria-label={menuOpen ? "Close menu" : "Open menu"}
+    className="rounded-full h-10 w-10 overflow-hidden flex items-center justify-center">
+    <img
+      src={menuOpen ? MenuMovileOpen : MenuMovileClose}
+      alt=""
+      aria-hidden="true"
+      className="h-10 w-6"
+    />
+  </button>
+    </div>
 
-    <div className="font-['inter'] flex h-full min-w-0 items-center justify-center text-center rounded-[100px] px-2 text-[12px] sm:px-6 sm:text-base bg-[#D9D9D9]/8 backdrop-blur-[100px] hover:bg-white/20 transition-all duration-200">
+    {menuOpen && (
+      <nav className="absolute top-16 right-0 flex w-full flex-col gap-2 rounded-3xl bg-[#D9D9D9]/8 p-4 font-['inter'] text-base backdrop-blur-[100px] md:hidden">
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={() => setMenuOpen(false)}
+            className="rounded-full px-5 py-3 text-left transition-all duration-200 hover:bg-white/10"
+          >
+            {item.label}
+          </a>
+        ))}
+        <a
+          href={mailTo}
+          onClick={() => setMenuOpen(false)}
+          className="rounded-full px-5 py-3 text-left transition-all duration-200 hover:bg-white/10"
+        >
+          Contact
+        </a>
+      </nav>
+    )}
+   
+    <div className="font-['inter'] hidden md:flex h-full min-w-0 items-center justify-center text-center rounded-[100px] px-2 text-[12px] sm:px-6 sm:text-base bg-[#D9D9D9]/8 backdrop-blur-[100px] hover:bg-white/20 transition-all duration-200">
       {navItems.map((item) => (
         <div
           key={item.href}
@@ -125,10 +168,10 @@ function Hero() {
 
 
     <a 
-    className="h-full"
+    className="h-full hidden md:block"
     href={mailTo}>
       <div className="font-['inter'] h-full shrink-0 items-center justify-center text-center rounded-[100px] px-6 text-[12px] sm:text-base flex bg-[#D9D9D9]/8 backdrop-blur-[100px] hover:bg-white/20 transition-all duration-200">
-      Contact
+       Contact
     </div></a>
   </div>
 

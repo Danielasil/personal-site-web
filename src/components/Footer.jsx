@@ -41,24 +41,35 @@ useLayoutEffect(() => {
     
   <div className="w-full grid grid-cols-2 mt-19.75 mb-37.5 gap-10 sm:flex sm:flex-col lg:flex-row lg:justify-between">
 {/*Tag Aviable*/}
-    <div className="bg-black rounded-[5px] cursor-default text-white text-[16px] flex items-center px-2 gap-2 h-8.5 w-fit border border-[#9B9B9B]">
+    <div className="bg-black rounded-[5px] flex cursor-defaultflex items-center px-2 gap-2 h-8.5 w-fit border border-[#9B9B9B]">
         <div className="dot bg-green-400 h-2.5 w-2.5 rounded-full"></div>
-        <h1>Available to hire</h1>
+        <h1 className="text-white text-[16px] max-[400px]:text-[10px]">
+  Available to hire
+</h1>
     </div>
 
 {/*Footer links*/}
     
-      <div className="flex flex-col w-57.5 text-[18px]">
-    <h1 className="text-white/80">Location</h1>
-    <p className=" text-white">Oviedo, Asturias. Spain</p>
- 
-    </div> 
+      <div className="flex flex-col w-57.5 text-[18px] max-[400px]:text-[16px]">
+  <h1 className="text-white/80">Location</h1>
+
+  <p className="text-white">
+    Oviedo, Asturias.
+    
+    <br className="hidden max-[400px]:block" />
+
+    <span className="max-[400px]:block">
+      Spain
+    </span>
+  </p>
+</div> 
 
     <div className="flex flex-col w-57.5">
     <h1 className="text-white/80">Contact</h1>
-    <p className="text-white"><a
+    <p className="text-white max-[400px]:w-[70%]">
+  <a
   href={mailTo}
-  className="block max-w-[80%] break-all text-[18px] hover:underline sm:max-w-none sm:break-normal"
+  className="max-[400px]:text-[16px] block max-w-[80%] break-all text-[18px] hover:underline sm:max-w-none sm:break-normal"
 >
   {contactEmail}
 </a></p>
@@ -70,7 +81,7 @@ useLayoutEffect(() => {
         {socialLinks.map((link) => (
           <p key={link.href}>
             <a
-              className="hover:underline"
+              className="hover:underline max-[400px]:text-[16px]"
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
