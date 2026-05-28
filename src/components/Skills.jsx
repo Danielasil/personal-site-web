@@ -1,4 +1,4 @@
-import HireButton from "./HireButton"
+import PortfolioButton from "./PortfolioButton"
 
 function Skills() {
 
@@ -7,19 +7,19 @@ function Skills() {
         <div id="skills" className="bg-black flex flex-col items-center px-5 text-white font-['Inter']">
           <div className=" flex flex-col items-center justify-between w-full mt-40 gap-6 md:flex-row">
 {/*Header Skills*/}
-  <div className="flex w-full max-w-170 h-fit items-center justify-start text-left mb-10 md:mb-0">
+  <div className="cursor-default flex w-full max-w-170 h-fit items-center justify-start text-left mb-10 md:mb-0">
     <h1 className="text-left text-[18px]">
       I am a designer and frontend developer, so my skills are varied, but they fall into this main categories.
     </h1>
   </div>
 
- <HireButton />
+ <PortfolioButton/>
 
 </div>
             
           
 {/*Skills*/}
-  <div className=" w-full flex flex-col gap-17.5 mt-19.75 mb-37.5 lg:flex-row text-[18px]">
+  <div className="cursor-default w-full flex flex-col gap-17.5 mt-19.75 mb-37.5 lg:flex-row text-[18px]">
 
     <div className="flex flex-col gap-8.75 w-full lg:w-137.5">
     <h1>Ux/Ui Design</h1>

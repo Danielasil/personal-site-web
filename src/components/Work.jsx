@@ -1,10 +1,10 @@
 import { useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import artWorkMockup from "../assets/ArtWorkMockupPersonalWeb.png"
-import urbanLeafMockup from "../assets/UrbanLeafMockupPersonalWeb.png"
-import weatherlyMockup from "../assets/WeatherlyMockupPersonalWeb.png"
-import ticTacToeMockup from "../assets/Tic-Tac-ToeMockupPersonalWeb.png"
+import artWorkMockup from "../assets/ArtWorkImg.png"
+import urbanLeafMockup from "../assets/UrbanLeafImg.png"
+import weatherlyMockup from "../assets/WeatherlyImg.png"
+import ticTacToeMockup from "../assets/Tic-Tac-ToeImg.svg"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,6 +14,8 @@ function Work() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray(".work-card").forEach((card) => {
+        const copy = card.querySelector(".work-copy")
+
         gsap.fromTo(
           card,
           { opacity: 0, y: -16 },
@@ -29,29 +31,27 @@ function Work() {
             },
           }
         )
+
+        gsap.fromTo(
+          copy,
+          { opacity: 0, y: -16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 55%",
+              toggleActions: "play none none none",
+            },
+          }
+        )
       })
     }, workRef)
 
     return () => ctx.revert()
   }, [])
-
-  const handleProjectEnter = (event) => {
-    const copy = event.currentTarget.querySelector(".work-copy")
-
-    gsap.killTweensOf(copy)
-    gsap.fromTo(
-      copy,
-      { opacity: 0, y: -16 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }
-    )
-  }
-
-  const handleProjectLeave = (event) => {
-    const copy = event.currentTarget.querySelector(".work-copy")
-
-    gsap.killTweensOf(copy)
-    gsap.to(copy, { opacity: 0, y: -16, duration: 0.35, ease: "power3.out" })
-  }
 
   const projects = [
     {
@@ -62,7 +62,7 @@ function Work() {
     },
     {
       title: "UrbanLeaf -Landing Page",
-      text: "This website is designed for an e-commerce site dedicated to selling plants. This project features a unique design that highlights the details and beauty of each item.",
+      text: "This website is designed for an e-commerce site dedicated to selling plants. This project features a design that highlights the details and beauty of each item.",
       link: "https://www.behance.net/gallery/240411223/UrbanLeaf-I-UXUI-Web-Design?platform=direct",
       image: urbanLeafMockup,
     },
@@ -90,15 +90,13 @@ function Work() {
         href={project.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="block"
-        onMouseEnter={handleProjectEnter}
-        onMouseLeave={handleProjectLeave}
+        className="group block cursor-pointer"
       >
-        <section className="work-card opacity-0 bg-[#625655] h-[90vh] relative overflow-hidden border-b-8 border-black">
+        <section className="work-card opacity-0 bg-[#625655] h-[90vh] relative overflow-hidden border-b-8 border-black transition-shadow duration-500 group-hover:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.45),inset_0_0_80px_rgba(255,255,255,0.18)]">
       <img
         src={project.image}
         alt={`${project.title} mockup`}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
       />
 
       <div className="work-copy opacity-0 absolute sm:w-[80%] bottom-1 left-5 right-5 px-1 py-2 w-112.5 lg:w-175">
